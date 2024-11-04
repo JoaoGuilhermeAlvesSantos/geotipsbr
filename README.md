@@ -1,2 +1,0 @@
-# geotipsbr
-Public repo geotipsbr
