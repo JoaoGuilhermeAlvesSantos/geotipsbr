@@ -6,7 +6,7 @@
     <title>GeoTipsBR.</title>
     <!-- Link do Bootstrap CSS via CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
+    <link href="css/style.css" ret="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -17,21 +17,21 @@
 
         <!-- Navegação -->
         <nav class="nav justify-content-center bg-light my-4">
-            <a class="nav-link" href="#dicas">Dicas</a>
-            <a class="nav-link" href="#jogo">Jogo</a>
+            <a href="#dicas" onclick="navigateTo('dicas')">Dicas</a>
+            <a href="#jogo" onclick="navigateTo('jogo')">Jogo</a>
         </nav>
 
         <!-- Conteúdo Principal -->
         <main>
-            <!-- Seção de Países -->
-            <section id="dicas" class="mb-5">
+            <!-- Seção de Dicas -->
+            <section id="dicas-section" class="page-section hidden">
                 <h2 class="text-secondary">Dicas</h2>
                 <p>Conteúdo Dicas será exibido aqui.</p>
                 <div id="dicas-content" class="row"></div>
             </section>
 
             <!-- Seção de Jogo -->
-            <section id="jogo" class="mb-5">
+            <section id="jogo-section" class="page-section hidden">
                 <h2 class="text-secondary">Jogo</h2>
                 <p>O jogo será exibido aqui.</p>
                 <div id="jogo-content"></div>
@@ -45,4 +45,5 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
 </body>
