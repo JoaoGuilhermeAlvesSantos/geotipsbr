@@ -5,14 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Just my section
         sections.forEach(section => {
-            section.classList.add('hidden');
+            section.style.display = 'none';
         });
         console.log(hash)
         // Show Session
-        if (hash === 'jogos') {
-            document.getElementById('dicas-section').classList.remove('hidden');
+        if (hash === 'jogo') {
+            document.getElementById('jogo-section').style.display= 'block';
         } else if (hash === 'dicas') {
-            document.getElementById('jogo-section').classList.remove('hidden');
+            document.getElementById('dicas-section').style.display= 'block';
         }
     }
 

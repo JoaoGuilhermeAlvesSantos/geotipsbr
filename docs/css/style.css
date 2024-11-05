@@ -1,5 +1,4 @@
 /* css/style.css */
-
 header {
     min-height: 100px;
 }
@@ -25,7 +24,4 @@ body, html {
     padding: 0; /* Remove padding padrão */
 }
 
-.hidden {
-    display: none;
-}
 
