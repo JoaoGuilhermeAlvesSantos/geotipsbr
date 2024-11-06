@@ -30,8 +30,8 @@
         <div class="sidebar bg-dark text-white p-3 position-fixed" id="sidebar" style="width: 250px; height: 100vh; left: 0;">
                  <h4 class="text-white">Menu</h4>           
             <ul class="list-unstyled">
-                <li><a href="#dicas" onclick="navigateTo('Dicas')" class="text-white text-decoration-none">Dicas</a></li>
-                <li><a href="#jogo" onclick="navigateTo('Jogo')" class="text-white text-decoration-none">Jogo</a></li>
+                <li><a href="#tips" onclick="navigateTo('tips')" class="text-white text-decoration-none">Dicas</a></li>
+                <li><a href="#game" onclick="navigateTo('game')" class="text-white text-decoration-none">Jogo</a></li>
                 <li><a href="#sobre" onclick="navigateTo('Sobre')" class="text-white text-decoration-none">Sobre</a></li>
                 <li><a href="#contato" onclick="navigateTo('Contato')" class="text-white text-decoration-none">Contato</a></li>
             </ul>
@@ -39,28 +39,18 @@
 
         <!-- Conteúdo Principal -->
         <div class="content ms-auto" style="margin-left: 250px; padding: 20px; width: calc(100% - 250px);">
-            <!-- Navegação -->
-            <div class="d-flex justify-content-between mb-4">
-                <nav class="nav justify-content-center bg-light my-4 d-none d-lg-flex">
-                    <a href="#dicas" onclick="navigateTo('Dicas')" class="tt">Dicas</a>
-                    <a href="#jogo" onclick="navigateTo('Jogo')" class="tt">Jogo</a>
-                    <a href="#sobre" onclick="navigateTo('Sobre')" class="tt">Sobre</a>
-                    <a href="#contato" onclick="navigateTo('Contato')" class="tt">Contato</a>
-                </nav>
-            </div>
-
             <!-- Seção de Dicas -->
-            <section id="dicas-section" class="page-section">
+            <section id="tips-section" class="page-section">
                 <h2 class="text-secondary">Dicas</h2>
                 <p>Conteúdo Dicas será exibido aqui.</p>
-                <div id="dicas-content" class="row"></div>
+                <div id="tips-content" class="row"></div>
             </section>
 
             <!-- Seção de Jogo -->
-            <section id="jogo-section" class="page-section">
+            <section id="game-section" class="page-section">
                 <h2 class="text-secondary">Jogo</h2>
                 <p>O jogo será exibido aqui.</p>
-                <div id="jogo-content"></div>
+                <div id="game-content"></div>
             </section>
         </div>
     </div>

@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         console.log(hash)
         // Show Session
-        if (hash === 'jogo') {
-            document.getElementById('jogo-section').style.display= 'block';
-        } else if (hash === 'dicas') {
-            document.getElementById('dicas-section').style.display= 'block';
+        if (hash === 'game') {
+            document.getElementById('game-section').style.display= 'block';
+        } else if (hash === 'tips') {
+            document.getElementById('tips-section').style.display= 'block';
         }
     }
 
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (!window.location.hash) {
-        window.location.hash = 'dicas';
+        window.location.hash = '';
     }
     showSection();
 });
