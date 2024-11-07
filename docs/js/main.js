@@ -16,6 +16,20 @@ async function loadComponent(componentId, filePath) {
     const component = document.getElementById(componentId);
     if (component) {
         component.innerHTML = await loadHTML(filePath);
+
+        // Executa scripts embutidos no HTML carregado
+        const scripts = component.querySelectorAll("script");
+        scripts.forEach(script => {
+            const newScript = document.createElement("script");
+            if (script.src) {
+                newScript.src = script.src;
+                newScript.async = true;
+            } else {
+                newScript.textContent = script.textContent;
+            }
+            document.body.appendChild(newScript);
+            document.body.removeChild(newScript);
+        });
     } else {
         console.warn(`Componente ${componentId} não encontrado.`);
     }
@@ -33,6 +47,18 @@ async function loadView() {
     const filePath = views[hash];
     if (filePath) {
         mainContent.innerHTML = await loadHTML(filePath);
+        const scripts = mainContent.querySelectorAll("script");
+        scripts.forEach(script => {
+            const newScript = document.createElement("script");
+            if (script.src) {
+                newScript.src = script.src;
+                newScript.async = true;
+            } else {
+                newScript.textContent = script.textContent;
+            }
+            document.body.appendChild(newScript);
+            document.body.removeChild(newScript);
+        });
     } else {
         mainContent.innerHTML = '<p>Seção não encontrada.</p>';
     }
