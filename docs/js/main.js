@@ -26,8 +26,8 @@ async function loadView() {
     const hash = window.location.hash.substring(1) || 'tips';
     const mainContent = document.getElementById('main-content');
     const views = {
-        tips: 'html/view/tips.html',
-        game: 'html/view/game.html'
+        tips: './html/view/tips.html',
+        game: './html/view/game.html'
     };
 
     const filePath = views[hash];
@@ -40,7 +40,7 @@ async function loadView() {
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Carrega os componentes
-    await loadComponent('sidebar-component', 'html/component/sidebar.html');
+    await loadComponent('sidebar-component', './html/component/sidebar.html');
 
     // Configura o evento de navegação
     window.addEventListener('hashchange', loadView);
