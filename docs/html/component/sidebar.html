@@ -1,0 +1,23 @@
+<div class="sb-menu sidebar bg-dark text-white p-3 position-fixed" id="sidebar"
+    style="width: 200px; height: 100vh; left: 0;">
+    <button class="btn btn-primary d-block" id="toggleButton"><i class="fa-solid fa-chevron-left"></i></button>
+    <ul class="list-unstyled side-items">
+        <li class="side-item"><a href="#tips" class="text-white text-decoration-none"> <i
+                    class="fa-solid fa-book"></i>Dicas</a></li>
+        <li class="side-item"><a href="#game" class="text-white text-decoration-none"><i
+                    class="fa-solid fa-gamepad"></i>Jogo</a></li>
+        <li class="side-item"><a href="#about" class="text-white text-decoration-none"><i
+                    class="fa-solid fa-address-card"></i>Sobre</a>
+        </li>
+        <li class="side-item"><a href="#info" class="text-white text-decoration-none"><i
+                    class="fa-solid fa-phone"></i>Contato</a></li>
+    </ul>
+</div>
+<script>
+    document.getElementById('toggleButton').addEventListener('click', function () {
+        console.log("Reachable");
+
+        var sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('d-none');
+    });
+</script>
