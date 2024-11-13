@@ -49,9 +49,10 @@ Array.from(sideItems).forEach(item => {
     });
 });
 
-    document.getElementsByClassName('side-item').addEventListener('click', () => { 
-        var ref = document.getElementsByClassName('side-item');
-        window.location = '#tips'
+document.querySelectorAll('.side-item').forEach(element => {
+    element.addEventListener('click', () => {
+        window.location = '#tips';
     });
+});
     
 </script>
