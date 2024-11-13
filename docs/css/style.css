@@ -83,3 +83,12 @@
 .config-span.expanded{
     margin-right: 50px;
 }
+
+.expanded-config{
+    display: none;
+}
+
+#configButton:hover .expanded-config{
+    display: block;
+    height: 100px;
+}
