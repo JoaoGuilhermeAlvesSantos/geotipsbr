@@ -1,0 +1,33 @@
+<section id="sites-section" class="page-section">
+    <h2 class="text-secondary">Sites</h2>
+    <p>Content</p>
+</section>
+<script>
+    async function runSQL() {
+        const SQL = await initSqlJs({
+            locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/${file}`
+        });
+
+        const db = new SQL.Database();
+        // Criar uma tabela e inserir dados
+        db.run("CREATE TABLE users (id INTEGER, name TEXT);");
+        db.run("INSERT INTO users (id, name) VALUES (1, 'Alice');");
+        db.run("INSERT INTO users (id, name) VALUES (2, 'Bob');");
+
+        // Consultar os dados
+        const stmt = db.prepare("SELECT * FROM users WHERE id > ?");
+        stmt.bind([0]);
+        while (stmt.step()) {
+            const row = stmt.getAsObject();
+            console.log(row);
+        }
+
+        stmt.free();
+        db.close();
+    }
+
+    runSQL();
+</script>
+
+
+<!-- Lembrar de fazer Download. -->

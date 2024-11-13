@@ -41,7 +41,8 @@ async function loadView() {
     const mainContent = document.getElementById('main-content');
     const views = {
         tips: './html/view/tips.html',
-        game: './html/view/game.html'
+        game: './html/view/game.html',
+        sites: './html/view/sites.html'
     };
 
     const filePath = views[hash];
