@@ -1,32 +1,166 @@
 <section id="sites-section" class="page-section">
     <h2 class="text-secondary">Sites</h2>
-    <p>Content</p>
+    <button id="refresh-db" onclick="refreshDatabase()">Atualizar</button> 
+    <ul id="country-list"></ul> 
 </section>
 <script>
+    async function refreshDatabase() {
+        console.log("Cleaning Database")
+        // Apagar todos os dados do IndexedDB
+        const db = await openIndexedDB();
+        const transaction = db.transaction("countries", "readwrite");
+        const store = transaction.objectStore("countries");
+        store.clear(); // Apagar todos os dados
+
+        transaction.oncomplete = async () => {
+            console.log("Dados apagados do IndexedDB. Atualizando...");
+            await runSQL(); // Recarregar os dados do JSON e salvar no IndexedDB
+            const countries = await getCountriesFromIndexedDB(); // Recuperar os dados atualizados do IndexedDB
+            displayCountries(countries); // Atualizar a tela com os dados novos
+        };
+    }
+
+    // Função para carregar os dados do arquivo JSON
+    async function loadCountriesFromJSON() {
+        const response = await fetch('data/countries.json'); // Certifique-se de ter esse arquivo na pasta data
+        const data = await response.json();
+        return data;
+    }
+
+    // Função para abrir o IndexedDB e criar a tabela 'countries'
+    function openIndexedDB() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open("cmsDB", 1);
+
+            request.onupgradeneeded = function(event) {
+                const db = event.target.result;
+                if (!db.objectStoreNames.contains("countries")) {
+                    db.createObjectStore("countries", { keyPath: "url" });
+                }
+            };
+
+            request.onsuccess = function(event) {
+                resolve(event.target.result);
+            };
+
+            request.onerror = function(event) {
+                reject("Erro ao abrir IndexedDB: " + event.target.error);
+            };
+        });
+    }
+
+    // Função para salvar os dados no IndexedDB
+    function saveCountriesToIndexedDB(countries) {
+        return openIndexedDB().then(db => {
+            const transaction = db.transaction("countries", "readwrite");
+            const store = transaction.objectStore("countries");
+
+            countries.forEach(country => {
+                store.put(country); // Armazenar ou atualizar o país
+            });
+
+            return new Promise((resolve, reject) => {
+                transaction.oncomplete = function() {
+                    resolve();
+                };
+
+                transaction.onerror = function(event) {
+                    reject("Erro ao salvar dados no IndexedDB: " + event.target.error);
+                };
+            });
+        });
+    }
+
+    // Função para recuperar dados do IndexedDB
+    function getCountriesFromIndexedDB() {
+        return openIndexedDB().then(db => {
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction("countries", "readonly");
+                const store = transaction.objectStore("countries");
+
+                const request = store.getAll();
+
+                request.onsuccess = function() {
+                    resolve(request.result);
+                };
+
+                request.onerror = function(event) {
+                    reject("Erro ao recuperar dados do IndexedDB: " + event.target.error);
+                };
+            });
+        });
+    }
+
+    // Função para exibir os dados dos países na página
+    function displayCountries(countries) {
+        const countryList = document.getElementById('country-list');
+        countryList.innerHTML = ''; // Limpar lista antes de adicionar
+
+        countries.forEach(country => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <h4><img src="${country.flag_url}" alt="Bandeira do ${country.name}" width="50"> ${country.name}</h4>
+                <p>Url: ${country.url}</p>
+                <p>Explanation: ${country.explanation}</p>                
+            `;
+            countryList.appendChild(li);
+        });
+    }
+
     async function runSQL() {
         const SQL = await initSqlJs({
             locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/${file}`
         });
 
         const db = new SQL.Database();
-        // Criar uma tabela e inserir dados
-        db.run("CREATE TABLE users (id INTEGER, name TEXT);");
-        db.run("INSERT INTO users (id, name) VALUES (1, 'Alice');");
-        db.run("INSERT INTO users (id, name) VALUES (2, 'Bob');");
+        
+        // Criar a tabela "countries" no banco
+        db.run("CREATE TABLE countries (url TEXT, name TEXT, explanation TEXT, flag_url TEXT);");
 
-        // Consultar os dados
-        const stmt = db.prepare("SELECT * FROM users WHERE id > ?");
-        stmt.bind([0]);
+        // Carregar os dados do JSON e inseri-los no banco de dados
+        const countriesFromJSON = await loadCountriesFromJSON();
+
+        // Inserir os dados na tabela
+        countriesFromJSON.forEach(country => {
+            db.run("INSERT INTO countries (url, name, explanation, flag_url) VALUES (?, ?, ?, ?);", 
+                [country.name, country.entity, country.explanation, country.flag_url]);
+        });
+
+        // Consultar os dados no banco
+        const stmt = db.prepare("SELECT * FROM countries");
+        const countries = [];
         while (stmt.step()) {
             const row = stmt.getAsObject();
-            console.log(row);
+            countries.push(row);
         }
 
         stmt.free();
         db.close();
+
+        // Salvar os dados no IndexedDB
+        await saveCountriesToIndexedDB(countries);
+
+        // Exibir os dados na página
+        displayCountries(countries);
     }
 
-    runSQL();
+    // Função para carregar os dados
+    async function loadData() {
+        let countries = await getCountriesFromIndexedDB();
+
+        // Se não houver dados no IndexedDB, carrega do JSON e salva
+        if (countries.length === 0) {
+            console.log('Carregando países do JSON...');
+            await runSQL(); // Isso vai carregar do JSON, inserir no banco SQL.js e salvar no IndexedDB
+            countries = await getCountriesFromIndexedDB(); // Agora recuperamos os dados do IndexedDB
+        }
+
+        // Exibir os dados dos países
+        displayCountries(countries);
+    }
+
+    // Carregar os dados ao carregar a página
+    loadData();
 </script>
 
 
