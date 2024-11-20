@@ -1,25 +1,69 @@
 <div class="sb-menu sidebar bg-dark text-white p-3 position-fixed" id="sidebar">
-    <button class="btn btn-primary d-block" id="togglebutton"><i class="fa-solid fa-chevron-left"></i></button>
+        <img src="assets/geologo.png"  class="logo-open"></img>
+        <img src="assets/geologoclose.png"  class="logo-close"></img>
     <ul class="list-unstyled side-items">
-        <li class="side-item"><a href="#home" class="text-white text-decoration-none"> <span class="material-symbols-outlined">
-            home
-            </span><span class="side-item-text">Home</span></a></li>
-        <li class="side-item"><a href="#tips" class="text-white text-decoration-none"> <span class="material-symbols-outlined">
-            auto_stories
-            </span><span class="side-item-text">Dicas</span></a></li>
-        <li class="side-item"><a href="#game" class="text-white text-decoration-none"><span class="material-symbols-outlined">
-            stadia_controller
-            </span><span class="side-item-text">Jogo</span></a></li>
-        <li class="side-item"><a href="#sites" class="text-white text-decoration-none"><span class="material-symbols-outlined">
-            link
-            </span><span class="side-item-text">Sites</span></a></li>
-        <li class="side-item"><a href="#about" class="text-white text-decoration-none"><span class="material-symbols-outlined">
-            contact_mail
-            </span><span class="side-item-text">Sobre</span></a></li>
-        <li class="side-item"><a href="#info" class="text-white text-decoration-none"><span class="material-symbols-outlined">
-            support_agent
-            </span><span class="side-item-text config-btn">Contato</span></a></li>
+        <li class="side-item">
+            <a href="#home" class="text-white text-decoration-none">
+                <span class="material-symbols-outlined">
+                    home
+                </span>
+                <span class="side-item-text">
+                    Home
+                </span>
+            </a>
+        </li>
+        <li class="side-item">
+            <a href="#tips" class="text-white text-decoration-none">
+                <span class="material-symbols-outlined">
+                    auto_stories
+                </span>
+                <span class="side-item-text">
+                    Dicas
+                </span>
+            </a>
+        </li>
+        <li class="side-item">
+            <a href="#game" class="text-white text-decoration-none">
+                <span class="material-symbols-outlined">
+                    stadia_controller
+                </span>
+                <span class="side-item-text">
+                    Jogo
+                </span>
+            </a>
+        </li>
+        <li class="side-item">
+            <a href="#sites" class="text-white text-decoration-none">
+                <span class="material-symbols-outlined">
+                    link
+                </span>
+                <span class="side-item-text">
+                    Sites
+                </span>
+            </a>
+        </li>
+        <li class="side-item">
+            <a href="#about" class="text-white text-decoration-none">
+                <span class="material-symbols-outlined">
+                    contact_mail
+                </span>
+                <span class="side-item-text">
+                    Sobre
+                </span>
+            </a>
+        </li>
+        <li class="side-item">
+            <a href="#info" class="text-white text-decoration-none">
+                <span class="material-symbols-outlined">
+                    support_agent
+                </span>
+                <span class="side-item-text config-btn">
+                    Contato
+                </span>
+            </a>
+        </li>
     </ul>
+    
     <div class="config-btn side-item" id="configButton">
         <span class="material-symbols-outlined config-span">
             settings
@@ -27,37 +71,37 @@
         <div class="expanded-config">
             <label class="toggle">
                 <input type="checkbox" id="dark-mode-toggle">
-                <span class="material-symbols-outlined icon-light">light_mode</span>
-                <span class="material-symbols-outlined icon-dark">dark_mode</span>
             </label>
         </div>
+    </div>
+    <div>
     </div>
 </div>
 
 <script>
-     const sidebar = document.getElementById('sidebar');
+    const sidebar = document.getElementById('sidebar');
 
-sidebar.addEventListener('mouseenter', function () {
-    sidebar.classList.add('expanded');
-});
-
-sidebar.addEventListener('mouseleave', function () {
-    sidebar.classList.remove('expanded');
-});
-
-// adicionar o evento de hover e click para todos os elementos do side-item
-const sideItems = document.getElementsByClassName('side-item');
-Array.from(sideItems).forEach(item => {
-    item.addEventListener('click', function () {
-        const target = this.querySelector('a').getAttribute('href');
-        window.location = target;
+    sidebar.addEventListener('mouseenter', function () {
+        sidebar.classList.add('expanded');
     });
-});
 
-document.querySelectorAll('.side-item').forEach(element => {
-    element.addEventListener('click', () => {
-        window.location = '#tips';
+    sidebar.addEventListener('mouseleave', function () {
+        sidebar.classList.remove('expanded');
     });
-});
-    
+
+    // adicionar o evento de hover e click para todos os elementos do side-item
+    const sideItems = document.getElementsByClassName('side-item');
+    Array.from(sideItems).forEach(item => {
+        item.addEventListener('click', function () {
+            const target = this.querySelector('a').getAttribute('href');
+            window.location = target;
+        });
+    });
+
+    document.querySelectorAll('.side-item').forEach(element => {
+        element.addEventListener('click', () => {
+            window.location = '#tips';
+        });
+    });
+
 </script>

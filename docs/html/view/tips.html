@@ -1,5 +1,60 @@
 <section id="tips-section" class="page-section">
     <h2 class="text-secondary">Dicas</h2>
     <p>Conteúdo Dicas será exibido aqui.</p>
-    <div id="tips-content" class="row"></div>
+
+    <div class="container mt-3">
+        <input type="text" id="search" class="form-control" placeholder="Buscar dicas...">
+    </div>
+
+    <section id="filters" class="container my-4">
+        <h2 class="mb-3">Filtrar por:</h2>
+        <div id="filters" class="d-flex flex-wrap gap-2">
+          <button class="btn btn-primary" data-filter="Brasil">Brasil</button>
+          <button class="btn btn-success" data-filter="Europa">Europa</button>
+          <button class="btn btn-warning" data-filter="Estradas">Estradas</button>
+          <button class="btn btn-info" data-filter="Vegetação">Vegetação</button>
+        </div>
+    </section>
+
+
+    <div class="tip" data-tags="Brasil, Estradas">
+        <h3>Estradas do Brasil</h3>
+        <p>No Brasil, as estradas geralmente têm placas amarelas e veículos com placas cinzas.</p>
+        <div class="tags">#Brasil #Estradas</div>
+    </div>
+    <div class="tip" data-tags="Europa, Vegetação">
+        <h3>Paisagens na Europa</h3>
+        <p>Na Europa, os campos verdes e as construções antigas são comuns em áreas rurais.</p>
+        <div class="tags">#Europa #Vegetação</div>
+    </div>
+
 </section>
+<script>
+    document.querySelectorAll('#filters button').forEach(button => {
+        button.addEventListener('click', () => {
+            const filter = button.getAttribute('data-filter');
+            document.querySelectorAll('.tip').forEach(tip => {
+                const tags = tip.getAttribute('data-tags');
+                if (tags.includes(filter)) {
+                    tip.style.display = 'block';
+                } else {
+                    tip.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    document.querySelector('#search').addEventListener('input', event => {
+        const query = event.target.value.toLowerCase();
+        document.querySelectorAll('.tip').forEach(tip => {
+            const content = tip.innerText.toLowerCase();
+            if (content.includes(query)) {
+                tip.style.display = 'block';
+            } else {
+                tip.style.display = 'none';
+            }
+        });
+    });
+
+
+</script>

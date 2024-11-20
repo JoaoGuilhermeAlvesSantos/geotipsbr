@@ -11,18 +11,18 @@
     flex-direction: column;
     border-radius: 0px 18px 18px 0px;
     transition: width 0.3s ease;
-    width: 80px; 
+    width: 80px;
     height: 100vh;
-    z-index: 2; 
+    z-index: 2;
     background-color: #343a40;
 }
 
 .sidebar.expanded {
-    width: 250px; 
+    width: 250px;
 }
 
 .sidebar:hover {
-    width: 250px; 
+    width: 250px;
 }
 
 .side-items {
@@ -30,7 +30,7 @@
     flex-direction: column;
     gap: 8px;
     list-style: none;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .side-item {
@@ -50,16 +50,16 @@
 }
 
 .side-item-text {
-    display: none; 
-    margin-left: 10px; 
-    transition: opacity 0.3s ease, visibility 0.3s ease; 
+    display: none;
+    margin-left: 10px;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .sidebar.expanded .side-item-text {
     display: inline;
-    opacity: 1; 
-    visibility: visible; 
-} 
+    opacity: 1;
+    visibility: visible;
+}
 
 .side-item:hover {
     background-color: rgb(31, 27, 27);
@@ -76,35 +76,28 @@
     text-decoration: underline;
 }
 
-.config-btn{
-    margin-top: auto; 
+.config-btn {
+    margin-top: auto;
 }
 
-.config-span.expanded{
+.config-span.expanded {
     margin-right: 50px;
 }
 
-.expanded-config{
+.expanded-config {
     display: none;
 }
 
-#configButton:hover .expanded-config{
+#configButton:hover .expanded-config {
     display: block;
     height: 100px;
 }
 
-.d-flex {
-    min-height: 90vh;
-
-}
-
-.dark-mode-btn{
+.dark-mode-btn {
     margin-left: 50px;
     font-size: 40px;
 }
 
-
-/* Estilos do Botão */
 .toggle {
     position: relative;
     display: inline-flex;
@@ -128,29 +121,72 @@
 }
 
 
-.toggle input:checked ~ .icon-light {
+.toggle input:checked~.icon-light {
     opacity: 0;
 }
 
-.toggle input:checked ~ .icon-dark {
+.toggle input:checked~.icon-dark {
     opacity: 1;
 }
 
 /* Estilos para o conteúdo do modo escuro */
-input:checked ~ #main-content {
+input:checked~#main-content {
     background-color: #000000;
     color: #ffffff;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-.svg-object{
-    
+
+.svg-object {
+
     width: 600px;
     height: 600px;
-    clip-path: inset(30% 0 30% 0); /* Ajusta o corte nas partes superior e inferior */
-    transition: clip-path 0.3s ease; /* Anima o corte ao passar o mouse */
+    clip-path: inset(30% 0 30% 0);
+    transition: clip-path 0.3s ease;
 
 }
 
 .svg-object:hover {
-    clip-path: inset(5% 0 5% 0); /* Expande ligeiramente o corte ao passar o mouse */
+    clip-path: inset(5% 0 5% 0);
+}
+
+
+.logo-close {
+    opacity: 1;
+
+}
+
+.sidebar .logo-open {
+    margin-top: 10px;
+    opacity: 0;
+
+}
+
+.sidebar:hover .logo-close {
+    opacity: 0;
+}
+
+.sidebar:hover .logo-open {
+    opacity: 1;
+    margin-top: 20px;
+    margin-bottom: 0;
+    bottom: 0;
+    width: 180px;
+}
+
+.icon-light {
+    font-weight: 500;
+    margin-left: 14px;
+    font-size: 25px;
+}
+
+#tips-section .card {
+    transition: transform 0.2s ease-in-out;
+}
+
+#tips-section .card:hover {
+    transform: scale(1.05);
+}
+
+#filters .btn{
+    height: 40px;
 }
